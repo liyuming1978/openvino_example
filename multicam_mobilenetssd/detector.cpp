@@ -130,7 +130,7 @@ bool Detector::Detect(vector<Detector::Result>& objects) {
 	infer_request_->Infer();
 	/* get the result */
 	const Blob::Ptr output_blob = infer_request_->GetBlob(outputname);
-	const float* result = static_cast<PrecisionTrait<Precision::FP32>::value_type*>(output_blob->buffer());
+	float* result = static_cast<PrecisionTrait<Precision::FP32>::value_type*>(output_blob->buffer());
 	for (int k = 0; k < maxProposalCount ; k++) {
 		resultbox object;
 		int imgid = (int)result[0];

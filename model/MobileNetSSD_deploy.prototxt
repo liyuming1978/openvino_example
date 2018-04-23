@@ -1,16 +1,10 @@
 name: "MobileNet-SSD"
-layer {
-  name: "data"
-  type: "Input"
-  top: "data"
-  input_param {
-    shape {
-      dim: 1
-      dim: 3
-      dim: 300
-      dim: 300
-    }
-  }
+input: "data"
+input_shape {
+  dim: 1
+  dim: 3
+  dim: 300
+  dim: 300
 }
 layer {
   name: "conv0"
@@ -1197,7 +1191,7 @@ layer {
     decay_mult: 0.0
   }
   convolution_param {
-    num_output: 6
+    num_output: 63
     kernel_size: 1
     weight_filler {
       type: "msra"
@@ -1236,7 +1230,7 @@ layer {
   bottom: "data"
   top: "conv11_mbox_priorbox"
   prior_box_param {
-    min_size: 30.0
+    min_size: 60.0
     aspect_ratio: 2.0
     flip: true
     clip: false
@@ -1307,7 +1301,7 @@ layer {
     decay_mult: 0.0
   }
   convolution_param {
-    num_output: 12
+    num_output: 126
     kernel_size: 1
     weight_filler {
       type: "msra"
@@ -1346,8 +1340,8 @@ layer {
   bottom: "data"
   top: "conv13_mbox_priorbox"
   prior_box_param {
-    min_size: 81.0
-    max_size: 132.0
+    min_size: 105.0
+    max_size: 150.0
     aspect_ratio: 2.0
     aspect_ratio: 3.0
     flip: true
@@ -1419,7 +1413,7 @@ layer {
     decay_mult: 0.0
   }
   convolution_param {
-    num_output: 12
+    num_output: 126
     kernel_size: 1
     weight_filler {
       type: "msra"
@@ -1458,8 +1452,8 @@ layer {
   bottom: "data"
   top: "conv14_2_mbox_priorbox"
   prior_box_param {
-    min_size: 132.0
-    max_size: 183.0
+    min_size: 150.0
+    max_size: 195.0
     aspect_ratio: 2.0
     aspect_ratio: 3.0
     flip: true
@@ -1531,7 +1525,7 @@ layer {
     decay_mult: 0.0
   }
   convolution_param {
-    num_output: 12
+    num_output: 126
     kernel_size: 1
     weight_filler {
       type: "msra"
@@ -1570,8 +1564,8 @@ layer {
   bottom: "data"
   top: "conv15_2_mbox_priorbox"
   prior_box_param {
-    min_size: 183.0
-    max_size: 234.0
+    min_size: 195.0
+    max_size: 240.0
     aspect_ratio: 2.0
     aspect_ratio: 3.0
     flip: true
@@ -1643,7 +1637,7 @@ layer {
     decay_mult: 0.0
   }
   convolution_param {
-    num_output: 12
+    num_output: 126
     kernel_size: 1
     weight_filler {
       type: "msra"
@@ -1682,7 +1676,7 @@ layer {
   bottom: "data"
   top: "conv16_2_mbox_priorbox"
   prior_box_param {
-    min_size: 234.0
+    min_size: 240.0
     max_size: 285.0
     aspect_ratio: 2.0
     aspect_ratio: 3.0
@@ -1755,7 +1749,7 @@ layer {
     decay_mult: 0.0
   }
   convolution_param {
-    num_output: 12
+    num_output: 126
     kernel_size: 1
     weight_filler {
       type: "msra"
@@ -1858,7 +1852,7 @@ layer {
     shape {
       dim: 0
       dim: -1
-      dim: 2
+      dim: 21
     }
   }
 }
@@ -1891,7 +1885,7 @@ layer {
     phase: TEST
   }
   detection_output_param {
-    num_classes: 2
+    num_classes: 21
     share_location: true
     background_label_id: 0
     nms_param {
