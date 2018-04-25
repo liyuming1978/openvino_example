@@ -94,19 +94,19 @@ void *thr_video(void *arg)
 	int curbatch=INPUTNUM;
 	//wait_timer.Start();
 	while (grunning){
-		changebatch++;
+		/*changebatch++;
 		if(changebatch>1000)
 			changebatch=0;
 		if((changebatch%2)==0)
 			curbatch=INPUTNUM-1;
 		else
-			curbatch=INPUTNUM;
+			curbatch=INPUTNUM;*/
 		
 		for(int i=0;i<curbatch;i++) {
 			//note , here I do each one by one, so avoid heavy IO, and do as quick as possible, no wait
 			//cv::Mat frame = vdec[i].GetFrame(gpdetector->GetNetSize().width,gpdetector->GetNetSize().height);
 			cv::Mat frame = vdec[i].GetFrame(ginput_width,ginput_height);
-			if(gpdetector->InsertImage(frame,i,curbatch)==Detector::INSERTIMG_FILLONE){
+			if(gpdetector->InsertImage(frame,i)==Detector::INSERTIMG_FILLONE){
 				safewakeup(); 
 			}			
 		}
@@ -155,7 +155,7 @@ void *thr_camera_each(void *arg)
 				glastcam = frame.clone();
 				pthread_mutex_unlock(&mutexcamimg); 
 			}
-			if(gpdetector->InsertImage(frame,camid,INPUTNUM)==Detector::INSERTIMG_FILLONE){
+			if(gpdetector->InsertImage(frame,camid)==Detector::INSERTIMG_FILLONE){
 				safewakeup(); 
 			}
 		}
@@ -164,7 +164,7 @@ void *thr_camera_each(void *arg)
 			pthread_mutex_lock(&mutexcamimg); 	
 			fakeimg = glastcam.clone();
 			pthread_mutex_unlock(&mutexcamimg); 	
-			if(gpdetector->InsertImage(fakeimg,camid,INPUTNUM)==Detector::INSERTIMG_FILLONE){
+			if(gpdetector->InsertImage(fakeimg,camid)==Detector::INSERTIMG_FILLONE){
 				safewakeup(); 
 			}
 			safesleep(20);
@@ -217,12 +217,12 @@ void *thr_camera(void *arg) {
 				cv::Mat frame;  //this is a local var, = new a image
 				cap[i].read(frame);
 				lastframe = frame;
-				if(gpdetector->InsertImage(frame,i,INPUTNUM)==Detector::INSERTIMG_FILLONE){
+				if(gpdetector->InsertImage(frame,i)==Detector::INSERTIMG_FILLONE){
 					safewakeup(); 
 				}				
 			}
 			else{
-				if(gpdetector->InsertImage(lastframe.clone(),i,INPUTNUM)==Detector::INSERTIMG_FILLONE){
+				if(gpdetector->InsertImage(lastframe.clone(),i)==Detector::INSERTIMG_FILLONE){
 					safewakeup(); 
 				}								
 			}

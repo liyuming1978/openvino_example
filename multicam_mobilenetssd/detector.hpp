@@ -17,6 +17,7 @@
 #include <cpp/ie_cnn_net_reader.h>
 #include <inference_engine.hpp>
 #include <unistd.h> 
+#include <semaphore.h>
 	
 using std::queue;  
 using std::string;
@@ -66,7 +67,7 @@ public:
 	bool Detect(vector<Result>& objects);
 	inline int GetCurBatch(){return  num_batch_;}
 	inline cv::Size GetNetSize(){return input_geometry_;}
-	InsertImgStatus InsertImage(const cv::Mat& orgimg,int inputid,int batch_num);
+	InsertImgStatus InsertImage(const cv::Mat& orgimg,int inputid);
 	int TryDetect();
 	void Stop();
 
@@ -93,11 +94,13 @@ private:
 	//int max_imgqueue_;
 	int curdata_batch_;
 	float* pbatch_element_;
+	float* pnet_data;
 	bool m_start;
 	std::string inputname;
 	std::string outputname;
 	CNNNetwork network_;
 	InferRequest::Ptr infer_request_;
 	int maxProposalCount;
+	sem_t insert_semt_;
 };
 #endif //__DETECTOR_HPP_

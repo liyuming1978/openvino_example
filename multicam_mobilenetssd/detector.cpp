@@ -13,19 +13,20 @@ Detector::Detector(const string& model_file,
 	InferenceEngine::CNNNetReader netReader;
 	netReader.ReadNetwork(model_file);
 	network_ = netReader.getNetwork();
-	SetBatch(6); //just set , you can set any value here. or not set , just keep net batch? -- yuming.li mark
+	//SetBatch(6); //just set , you can set any value here. or not set , just keep net batch? -- yuming.li mark
+	num_batch_ = network_.getBatchSize();  //IE can not support dynamically batch for ssd
 	netReader.ReadWeights(weights_file);
 // ---------------------------Set inputs ------------------------------------------------------	
 	InferenceEngine::InputsDataMap inputInfo(network_.getInputsInfo());
 	auto& inputInfoFirst = inputInfo.begin()->second;
 	inputInfoFirst->setPrecision(Precision::FP32); //since mean and scale, here must set FP32
-	inputInfoFirst->getInputData()->setLayout(Layout::NCHW);
+	//inputInfoFirst->getInputData()->setLayout(Layout::NCHW);
 	inputname = inputInfo.begin()->first;
 // ---------------------------Set outputs ------------------------------------------------------	
   InferenceEngine::OutputsDataMap outputInfo(network_.getOutputsInfo());
 	auto& _output = outputInfo.begin()->second;
 	_output->setPrecision(Precision::FP32);
-	_output->setLayout(Layout::NCHW);	
+	//_output->setLayout(Layout::NCHW);	
 	outputname = outputInfo.begin()->first;
 	const InferenceEngine::SizeVector outputDims = _output->dims;
 	maxProposalCount = outputDims[1];	//liyuming mark: if detection > maxProposalCount... 
@@ -42,6 +43,9 @@ Detector::Detector(const string& model_file,
 	nbatch_index_ = 0;
 	m_start = true;
 	pbatch_element_ = NULL;
+	pnet_data = static_cast<float*>(imageInput->buffer());
+	sem_init(&insert_semt_, 0, 0);
+	sem_post(&insert_semt_);
 }
 
 Detector::~Detector() {
@@ -79,7 +83,7 @@ void Detector::SetBatch(int batch)
 	if(batch<1 ||batch==num_batch_)
 		return;
 	num_batch_=batch;
-	network_.setBatchSize(num_batch_);
+	//network_.setBatchSize(num_batch_);  //IE can not support dynamically batch for ssd
 }
 
 int Detector::TryDetect() {
@@ -92,11 +96,11 @@ int Detector::TryDetect() {
 }
 
 bool Detector::Detect(vector<Detector::Result>& objects) {
-	float* pdata;
+	//float* pdata;
 	int nbatchnum;
 	pthread_mutex_lock(&mutex); 
 	if(!batchque_.empty()){
-		pdata = batchque_.front().data;
+		//pdata = batchque_.front().data;
 		nbatchnum = batchque_.front().num;
 		batchque_.pop();
 	}
@@ -119,13 +123,12 @@ bool Detector::Detect(vector<Detector::Result>& objects) {
 			imgque_.pop();
 		}
 	}
-	SetBatch(nbatchnum);
+	sem_post(&insert_semt_);
+	//SetBatch(nbatchnum);
 	pthread_mutex_unlock(&mutex); 
 
-	Blob::Ptr imageInput = infer_request_->GetBlob(inputname);
-	float* data = static_cast<float*>(imageInput->buffer());
-	memcpy(data,pdata,nbatchnum*num_channels_*input_geometry_.height*input_geometry_.width*sizeof(float));
-	delete pdata;
+	//memcpy(pnet_data,pdata,nbatchnum*num_channels_*input_geometry_.height*input_geometry_.width*sizeof(float)); //waist time...
+	//delete pdata;
 
 	infer_request_->Infer();
 	/* get the result */
@@ -211,28 +214,27 @@ void Detector::CreateMean() {
 void Detector::Stop()
 {
 	m_start=false;
+	sem_post(&insert_semt_);
 }
 /*
 	InsertImage will fill a blob until blob full, if full return the blob point
 */
-Detector::InsertImgStatus Detector::InsertImage(const cv::Mat& orgimg,int inputid,int batch_num) {
+Detector::InsertImgStatus Detector::InsertImage(const cv::Mat& orgimg,int inputid) {
 	InsertImgStatus retvalue=INSERTIMG_INSERTED;
 	if(orgimg.cols==0 || orgimg.rows==0 ||!m_start)
 		return INSERTIMG_NULL;
 	
-	pthread_mutex_lock(&mutex); 
-	while(batchque_.size()>2 && m_start){  //only cache 2 batch
-		pthread_mutex_unlock(&mutex); 	
-		usleep(2*1000); //sleep 2ms to recheck ! yumingli makr: I will change to wait later..
-		pthread_mutex_lock(&mutex); 
-	}
-	
+	pthread_mutex_lock(&mutex); 	
 	if(nbatch_index_==0){  //new a blob
+		pthread_mutex_unlock(&mutex);
+		sem_wait(&insert_semt_);
+		usleep(1000);  //liyuming mark:  ugly code, this sleep must need to wait the pnet_data will process by first layer
+		pthread_mutex_lock(&mutex);
 		if(!pbatch_element_)
 			delete pbatch_element_;
-		pbatch_element_ = new float[batch_num*num_channels_*input_geometry_.height*input_geometry_.width];
-		curdata_batch_ = batch_num;
-		WrapInputLayer(pbatch_element_);
+		//pbatch_element_ = new float[batch_num*num_channels_*input_geometry_.height*input_geometry_.width];
+		curdata_batch_ = num_batch_; //fix batch...
+		WrapInputLayer(pnet_data);
 	}
 	ImageSize is;
 	is.isize = orgimg.size();
