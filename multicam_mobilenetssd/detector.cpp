@@ -12,14 +12,18 @@ Detector::Detector(const string& model_file,
 	//std::string outputname;
 	InferenceEngine::CNNNetReader netReader;
 	netReader.ReadNetwork(model_file);
+	netReader.ReadWeights(weights_file);
 	network_ = netReader.getNetwork();
 	//SetBatch(6); //just set , you can set any value here. or not set , just keep net batch? -- yuming.li mark
 	num_batch_ = network_.getBatchSize();  //IE can not support dynamically batch for ssd
-	netReader.ReadWeights(weights_file);
 // ---------------------------Set inputs ------------------------------------------------------	
 	InferenceEngine::InputsDataMap inputInfo(network_.getInputsInfo());
 	auto& inputInfoFirst = inputInfo.begin()->second;
+#ifdef INPUT_U8
+	inputInfoFirst->setPrecision(Precision::U8); //since mean and scale, here must set FP32
+#else
 	inputInfoFirst->setPrecision(Precision::FP32); //since mean and scale, here must set FP32
+#endif
 	//inputInfoFirst->getInputData()->setLayout(Layout::NCHW);
 	inputname = inputInfo.begin()->first;
 // ---------------------------Set outputs ------------------------------------------------------	
@@ -37,13 +41,18 @@ Detector::Detector(const string& model_file,
 	num_channels_ = imageInput->dims()[2];
 	if(!(num_channels_ == 3 || num_channels_ == 1))
 		throw std::logic_error("Input layer should have 1 or 3 channels");
-	input_geometry_ = cv::Size(inputInfoFirst->getDims()[0], inputInfoFirst->getDims()[1]);	
+	input_geometry_ = cv::Size(imageInput->dims()[0], imageInput->dims()[1]);	
 	CreateMean();
 	
 	nbatch_index_ = 0;
 	m_start = true;
+
+	pnet_data = static_cast<IDtype*>(imageInput->buffer());
+#ifndef UGLY_NO_COPY
 	pbatch_element_ = NULL;
-	pnet_data = static_cast<float*>(imageInput->buffer());
+#else
+	WrapInputLayer(pnet_data);
+#endif	
 	sem_init(&insert_semt_, 0, 0);
 	sem_post(&insert_semt_);
 }
@@ -69,10 +78,12 @@ void Detector::EmptyQueue(queue<cv::Mat>& que)
 	}
 }
 
-void Detector::EmptyQueue(queue<Detector::BatchData>& que)
+void Detector::EmptyQueue(queue<IDtype*>& que)
 {
 	while(!que.empty()){
-		delete que.front().data;
+#ifndef UGLY_NO_COPY
+		delete que.front();
+#endif
 		que.pop();
 	}	
 }
@@ -90,18 +101,18 @@ int Detector::TryDetect() {
 	int curbatch=0;
 	pthread_mutex_lock(&mutex); 
 	if(!batchque_.empty())
-		curbatch=batchque_.front().num;
+		//curbatch=batchque_.front().num;
+		curbatch = num_batch_;
 	pthread_mutex_unlock(&mutex);
 	return curbatch;
 }
 
 bool Detector::Detect(vector<Detector::Result>& objects) {
-	//float* pdata;
-	int nbatchnum;
+	IDtype* pdata;
+	int nbatchnum=num_batch_;
 	pthread_mutex_lock(&mutex); 
 	if(!batchque_.empty()){
-		//pdata = batchque_.front().data;
-		nbatchnum = batchque_.front().num;
+		pdata = batchque_.front();
 		batchque_.pop();
 	}
 	else{
@@ -126,19 +137,21 @@ bool Detector::Detect(vector<Detector::Result>& objects) {
 	sem_post(&insert_semt_);
 	//SetBatch(nbatchnum);
 	pthread_mutex_unlock(&mutex); 
-
-	//memcpy(pnet_data,pdata,nbatchnum*num_channels_*input_geometry_.height*input_geometry_.width*sizeof(float)); //waist time...
-	//delete pdata;
+#ifndef UGLY_NO_COPY
+	memcpy(pnet_data,pdata,nbatchnum*num_channels_*input_geometry_.height*input_geometry_.width*sizeof(IDtype)); //waist time...
+	delete pdata;
+#endif
 
 	infer_request_->Infer();
 	/* get the result */
 	const Blob::Ptr output_blob = infer_request_->GetBlob(outputname);
-	float* result = static_cast<PrecisionTrait<Precision::FP32>::value_type*>(output_blob->buffer());
+	const float* result = static_cast<PrecisionTrait<Precision::FP32>::value_type*>(output_blob->buffer());
 	for (int k = 0; k < maxProposalCount ; k++) {
 		resultbox object;
 		int imgid = (int)result[0];
-		if (imgid < 0) {
-				break;
+		if (imgid < 0|| result[2] == 0) {  //!!!can not break, naocan  design...
+				result+=7;
+				continue;
 		}		
 		int w=objects[imgid].imgsize.width;
 		int h=objects[imgid].imgsize.height;		
@@ -160,13 +173,16 @@ bool Detector::Detect(vector<Detector::Result>& objects) {
 
 /* Wrap the input layer of the network in separate cv::Mat objects
 * (one per channel). This way we save one memcpy operation */
-void Detector::WrapInputLayer(float* input_data) {
+void Detector::WrapInputLayer(IDtype* input_data) {
 	input_channels.clear();
 	int width = input_geometry_.width;
 	int height = input_geometry_.height;
-	
-	for (int i = 0; i < curdata_batch_*num_channels_; ++i) {
+	for (int i = 0; i < num_batch_*num_channels_; ++i) {
+#ifdef INPUT_U8
+		cv::Mat channel(height, width, CV_8UC1, input_data);
+#else
 		cv::Mat channel(height, width, CV_32FC1, input_data);
+#endif
 		input_channels.push_back(channel);
 		input_data += width * height;
 	}
@@ -192,6 +208,9 @@ cv::Mat Detector::PreProcess(const cv::Mat& img) {
 	else
 		sample_resized = sample;
 
+#ifdef INPUT_U8
+	return sample_resized;
+#else
 	cv::Mat sample_float;
 	if (num_channels_ == 3)
 		sample_resized.convertTo(sample_float, CV_32FC3);
@@ -202,13 +221,16 @@ cv::Mat Detector::PreProcess(const cv::Mat& img) {
 	cv::scaleAdd (sample_float, 0.007843, mean_, sample_float); //scaleAdd or (add+multiply)? which speed : ans is scaleAdd
 	
 	return sample_float;
+#endif
 }
 
 void Detector::CreateMean() {
+#ifdef INPUT_U8
 	if (num_channels_ == 3)
 		mean_= cv::Mat(input_geometry_, CV_32FC3, cv::Scalar(-127.5*0.007843,-127.5*0.007843,-127.5*0.007843));
 	else
 		mean_= cv::Mat(input_geometry_, CV_32FC1, cv::Scalar(-127.5*0.007843));	
+#endif
 }
 
 void Detector::Stop()
@@ -230,11 +252,13 @@ Detector::InsertImgStatus Detector::InsertImage(const cv::Mat& orgimg,int inputi
 		sem_wait(&insert_semt_);
 		usleep(1000);  //liyuming mark:  ugly code, this sleep must need to wait the pnet_data will process by first layer
 		pthread_mutex_lock(&mutex);
+		curdata_batch_ = num_batch_; //fix batch...
+#ifndef UGLY_NO_COPY
 		if(!pbatch_element_)
 			delete pbatch_element_;
-		//pbatch_element_ = new float[batch_num*num_channels_*input_geometry_.height*input_geometry_.width];
-		curdata_batch_ = num_batch_; //fix batch...
-		WrapInputLayer(pnet_data);
+		pbatch_element_ = new IDtype[num_batch_*num_channels_*input_geometry_.height*input_geometry_.width];
+		WrapInputLayer(pbatch_element_);
+#endif		
 	}
 	ImageSize is;
 	is.isize = orgimg.size();
@@ -247,14 +271,15 @@ Detector::InsertImgStatus Detector::InsertImage(const cv::Mat& orgimg,int inputi
 	cv::split(img, &input_channels[num_channels_*nbatch_index_]);
 
 	//if full return pbatch_element_
-	if(++nbatch_index_>=curdata_batch_){
+	if(++nbatch_index_>=num_batch_){
 		nbatch_index_=0;
 		retvalue = INSERTIMG_FILLONE;
-		BatchData bd;
-		bd.num=curdata_batch_;
-		bd.data = pbatch_element_;
-		batchque_.push(bd);
+#ifndef UGLY_NO_COPY
+		batchque_.push(pbatch_element_);
 		pbatch_element_ = NULL;
+#else
+		batchque_.push((IDtype*)0);
+#endif
 	}
 	pthread_mutex_unlock(&mutex); 	
 	return retvalue;
