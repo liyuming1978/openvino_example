@@ -225,7 +225,7 @@ cv::Mat Detector::PreProcess(const cv::Mat& img) {
 }
 
 void Detector::CreateMean() {
-#ifdef INPUT_U8
+#ifndef INPUT_U8
 	if (num_channels_ == 3)
 		mean_= cv::Mat(input_geometry_, CV_32FC3, cv::Scalar(-127.5*0.007843,-127.5*0.007843,-127.5*0.007843));
 	else
