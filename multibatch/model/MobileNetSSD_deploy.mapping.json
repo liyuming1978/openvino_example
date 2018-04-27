@@ -1,0 +1,1322 @@
+[
+    {
+        "IR": {
+            "id": 43,
+            "name": "conv16_2_mbox_priorbox",
+            "port": 2
+        },
+        "framework": {
+            "name": "conv16_2_mbox_priorbox",
+            "port": "conv16_2_mbox_priorbox"
+        }
+    },
+    {
+        "IR": {
+            "id": 88,
+            "name": "conv11/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv11/relu",
+            "port": "conv11"
+        }
+    },
+    {
+        "IR": {
+            "id": 323,
+            "name": "conv11_mbox_loc",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv11_mbox_loc",
+            "port": "conv11_mbox_loc"
+        }
+    },
+    {
+        "IR": {
+            "id": 38,
+            "name": "conv6/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv6/dw",
+            "port": "conv6/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 21,
+            "name": "conv11_mbox_loc_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv11_mbox_loc_perm",
+            "port": "conv11_mbox_loc_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 46,
+            "name": "conv15_1/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv15_1/relu",
+            "port": "conv15_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 308,
+            "name": "conv15_2_mbox_loc",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv15_2_mbox_loc",
+            "port": "conv15_2_mbox_loc"
+        }
+    },
+    {
+        "IR": {
+            "id": 102,
+            "name": "conv11/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv11/dw/relu",
+            "port": "conv11/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 265,
+            "name": "conv13_mbox_loc",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv13_mbox_loc",
+            "port": "conv13_mbox_loc"
+        }
+    },
+    {
+        "IR": {
+            "id": 257,
+            "name": "conv16_1/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv16_1/relu",
+            "port": "conv16_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 289,
+            "name": "conv11/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv11/dw",
+            "port": "conv11/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 291,
+            "name": "conv14_2_mbox_conf",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv14_2_mbox_conf",
+            "port": "conv14_2_mbox_conf"
+        }
+    },
+    {
+        "IR": {
+            "id": 165,
+            "name": "conv11_mbox_conf_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv11_mbox_conf_perm",
+            "port": "conv11_mbox_conf_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 177,
+            "name": "detection_out",
+            "port": 3
+        },
+        "framework": {
+            "name": "detection_out",
+            "port": "detection_out"
+        }
+    },
+    {
+        "IR": {
+            "id": 209,
+            "name": "conv13/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv13/dw",
+            "port": "conv13/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 67,
+            "name": "conv17_2",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv17_2",
+            "port": "conv17_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 330,
+            "name": "conv16_2_mbox_loc_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv16_2_mbox_loc_perm",
+            "port": "conv16_2_mbox_loc_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 230,
+            "name": "conv13",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv13",
+            "port": "conv13"
+        }
+    },
+    {
+        "IR": {
+            "id": 98,
+            "name": "conv1/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv1/dw",
+            "port": "conv1/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 78,
+            "name": "conv14_2_mbox_loc_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv14_2_mbox_loc_flat",
+            "port": "conv14_2_mbox_loc_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 170,
+            "name": "mbox_loc",
+            "port": 6
+        },
+        "framework": {
+            "name": "mbox_loc",
+            "port": "mbox_loc"
+        }
+    },
+    {
+        "IR": {
+            "id": 66,
+            "name": "mbox_conf_softmax",
+            "port": 1
+        },
+        "framework": {
+            "name": "mbox_conf_softmax",
+            "port": "mbox_conf_softmax"
+        }
+    },
+    {
+        "IR": {
+            "id": 105,
+            "name": "conv16_2/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv16_2/relu",
+            "port": "conv16_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 42,
+            "name": "conv11_mbox_priorbox",
+            "port": 2
+        },
+        "framework": {
+            "name": "conv11_mbox_priorbox",
+            "port": "conv11_mbox_priorbox"
+        }
+    },
+    {
+        "IR": {
+            "id": 26,
+            "name": "conv16_1",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv16_1",
+            "port": "conv16_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 249,
+            "name": "conv2/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv2/dw/relu",
+            "port": "conv2/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 77,
+            "name": "conv2/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv2/relu",
+            "port": "conv2"
+        }
+    },
+    {
+        "IR": {
+            "id": 70,
+            "name": "conv4/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv4/dw",
+            "port": "conv4/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 143,
+            "name": "conv13_mbox_loc_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv13_mbox_loc_flat",
+            "port": "conv13_mbox_loc_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 63,
+            "name": "conv14_2_mbox_priorbox",
+            "port": 2
+        },
+        "framework": {
+            "name": "conv14_2_mbox_priorbox",
+            "port": "conv14_2_mbox_priorbox"
+        }
+    },
+    {
+        "IR": {
+            "id": 325,
+            "name": "conv12/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv12/dw",
+            "port": "conv12/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 288,
+            "name": "conv17_2_mbox_priorbox",
+            "port": 2
+        },
+        "framework": {
+            "name": "conv17_2_mbox_priorbox",
+            "port": "conv17_2_mbox_priorbox"
+        }
+    },
+    {
+        "IR": {
+            "id": 302,
+            "name": "conv10/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv10/relu",
+            "port": "conv10"
+        }
+    },
+    {
+        "IR": {
+            "id": 298,
+            "name": "conv16_2",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv16_2",
+            "port": "conv16_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 224,
+            "name": "conv5/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv5/dw",
+            "port": "conv5/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 281,
+            "name": "conv7/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv7/dw",
+            "port": "conv7/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 135,
+            "name": "conv8/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv8/dw/relu",
+            "port": "conv8/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 91,
+            "name": "conv8/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv8/dw",
+            "port": "conv8/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 202,
+            "name": "conv15_2_mbox_conf_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv15_2_mbox_conf_flat",
+            "port": "conv15_2_mbox_conf_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 59,
+            "name": "conv7/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv7/dw/relu",
+            "port": "conv7/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 121,
+            "name": "conv10",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv10",
+            "port": "conv10"
+        }
+    },
+    {
+        "IR": {
+            "id": 179,
+            "name": "conv13_mbox_loc_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv13_mbox_loc_perm",
+            "port": "conv13_mbox_loc_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 85,
+            "name": "conv15_2_mbox_conf_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv15_2_mbox_conf_perm",
+            "port": "conv15_2_mbox_conf_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 304,
+            "name": "conv17_2_mbox_loc_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv17_2_mbox_loc_perm",
+            "port": "conv17_2_mbox_loc_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 168,
+            "name": "conv1",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv1",
+            "port": "conv1"
+        }
+    },
+    {
+        "IR": {
+            "id": 29,
+            "name": "conv6/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv6/relu",
+            "port": "conv6"
+        }
+    },
+    {
+        "IR": {
+            "id": 134,
+            "name": "conv14_2_mbox_loc_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv14_2_mbox_loc_perm",
+            "port": "conv14_2_mbox_loc_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 139,
+            "name": "mbox_conf_flatten",
+            "port": 1
+        },
+        "framework": {
+            "name": "mbox_conf_flatten",
+            "port": "mbox_conf_flatten"
+        }
+    },
+    {
+        "IR": {
+            "id": 58,
+            "name": "conv2",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv2",
+            "port": "conv2"
+        }
+    },
+    {
+        "IR": {
+            "id": 182,
+            "name": "mbox_conf_reshape",
+            "port": 1
+        },
+        "framework": {
+            "name": "mbox_conf_reshape",
+            "port": "mbox_conf_reshape"
+        }
+    },
+    {
+        "IR": {
+            "id": 164,
+            "name": "conv16_2_mbox_conf",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv16_2_mbox_conf",
+            "port": "conv16_2_mbox_conf"
+        }
+    },
+    {
+        "IR": {
+            "id": 295,
+            "name": "conv8",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv8",
+            "port": "conv8"
+        }
+    },
+    {
+        "IR": {
+            "id": 240,
+            "name": "mbox_priorbox",
+            "port": 6
+        },
+        "framework": {
+            "name": "mbox_priorbox",
+            "port": "mbox_priorbox"
+        }
+    },
+    {
+        "IR": {
+            "id": 261,
+            "name": "conv12",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv12",
+            "port": "conv12"
+        }
+    },
+    {
+        "IR": {
+            "id": 215,
+            "name": "conv17_2_mbox_loc",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv17_2_mbox_loc",
+            "port": "conv17_2_mbox_loc"
+        }
+    },
+    {
+        "IR": {
+            "id": 226,
+            "name": "Mul_338/Fused_Mul_344/FusedScaleShift_349",
+            "port": 3
+        },
+        "framework": {
+            "name": "data",
+            "port": "data"
+        }
+    },
+    {
+        "IR": {
+            "id": 111,
+            "name": "conv16_2_mbox_conf_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv16_2_mbox_conf_flat",
+            "port": "conv16_2_mbox_conf_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 171,
+            "name": "conv17_1/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv17_1/relu",
+            "port": "conv17_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 9,
+            "name": "conv9",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv9",
+            "port": "conv9"
+        }
+    },
+    {
+        "IR": {
+            "id": 218,
+            "name": "conv3/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv3/relu",
+            "port": "conv3"
+        }
+    },
+    {
+        "IR": {
+            "id": 51,
+            "name": "conv13_mbox_conf",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv13_mbox_conf",
+            "port": "conv13_mbox_conf"
+        }
+    },
+    {
+        "IR": {
+            "id": 71,
+            "name": "conv17_2_mbox_loc_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv17_2_mbox_loc_flat",
+            "port": "conv17_2_mbox_loc_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 89,
+            "name": "conv2/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv2/dw",
+            "port": "conv2/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 163,
+            "name": "conv4/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv4/relu",
+            "port": "conv4"
+        }
+    },
+    {
+        "IR": {
+            "id": 331,
+            "name": "conv5/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv5/dw/relu",
+            "port": "conv5/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 188,
+            "name": "conv11_mbox_conf_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv11_mbox_conf_flat",
+            "port": "conv11_mbox_conf_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 119,
+            "name": "conv17_1",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv17_1",
+            "port": "conv17_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 174,
+            "name": "conv9/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv9/dw",
+            "port": "conv9/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 19,
+            "name": "conv14_2_mbox_conf_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv14_2_mbox_conf_perm",
+            "port": "conv14_2_mbox_conf_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 318,
+            "name": "conv9/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv9/relu",
+            "port": "conv9"
+        }
+    },
+    {
+        "IR": {
+            "id": 95,
+            "name": "conv6",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv6",
+            "port": "conv6"
+        }
+    },
+    {
+        "IR": {
+            "id": 124,
+            "name": "conv15_1",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv15_1",
+            "port": "conv15_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 244,
+            "name": "conv8/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv8/relu",
+            "port": "conv8"
+        }
+    },
+    {
+        "IR": {
+            "id": 305,
+            "name": "conv9/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv9/dw/relu",
+            "port": "conv9/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 154,
+            "name": "conv11",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv11",
+            "port": "conv11"
+        }
+    },
+    {
+        "IR": {
+            "id": 176,
+            "name": "conv12/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv12/dw/relu",
+            "port": "conv12/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 68,
+            "name": "conv14_2_mbox_conf_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv14_2_mbox_conf_flat",
+            "port": "conv14_2_mbox_conf_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 80,
+            "name": "conv17_2_mbox_conf_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv17_2_mbox_conf_flat",
+            "port": "conv17_2_mbox_conf_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 326,
+            "name": "conv0/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv0/relu",
+            "port": "conv0"
+        }
+    },
+    {
+        "IR": {
+            "id": 205,
+            "name": "conv1/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv1/relu",
+            "port": "conv1"
+        }
+    },
+    {
+        "IR": {
+            "id": 248,
+            "name": "conv14_2",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv14_2",
+            "port": "conv14_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 292,
+            "name": "conv17_2/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv17_2/relu",
+            "port": "conv17_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 115,
+            "name": "conv7/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv7/relu",
+            "port": "conv7"
+        }
+    },
+    {
+        "IR": {
+            "id": 203,
+            "name": "conv13_mbox_conf_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv13_mbox_conf_perm",
+            "port": "conv13_mbox_conf_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 166,
+            "name": "conv6/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv6/dw/relu",
+            "port": "conv6/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 13,
+            "name": "conv15_2_mbox_loc_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv15_2_mbox_loc_perm",
+            "port": "conv15_2_mbox_loc_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 122,
+            "name": "conv14_2/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv14_2/relu",
+            "port": "conv14_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 213,
+            "name": "conv16_2_mbox_loc",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv16_2_mbox_loc",
+            "port": "conv16_2_mbox_loc"
+        }
+    },
+    {
+        "IR": {
+            "id": 50,
+            "name": "conv16_2_mbox_loc_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv16_2_mbox_loc_flat",
+            "port": "conv16_2_mbox_loc_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 157,
+            "name": "conv14_1/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv14_1/relu",
+            "port": "conv14_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 228,
+            "name": "conv11_mbox_conf",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv11_mbox_conf",
+            "port": "conv11_mbox_conf"
+        }
+    },
+    {
+        "IR": {
+            "id": 253,
+            "name": "conv5",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv5",
+            "port": "conv5"
+        }
+    },
+    {
+        "IR": {
+            "id": 116,
+            "name": "conv16_2_mbox_conf_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv16_2_mbox_conf_perm",
+            "port": "conv16_2_mbox_conf_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 137,
+            "name": "conv3",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv3",
+            "port": "conv3"
+        }
+    },
+    {
+        "IR": {
+            "id": 132,
+            "name": "conv4",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv4",
+            "port": "conv4"
+        }
+    },
+    {
+        "IR": {
+            "id": 232,
+            "name": "conv15_2_mbox_conf",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv15_2_mbox_conf",
+            "port": "conv15_2_mbox_conf"
+        }
+    },
+    {
+        "IR": {
+            "id": 258,
+            "name": "conv3/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv3/dw",
+            "port": "conv3/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 100,
+            "name": "conv14_2_mbox_loc",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv14_2_mbox_loc",
+            "port": "conv14_2_mbox_loc"
+        }
+    },
+    {
+        "IR": {
+            "id": 125,
+            "name": "conv15_2/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv15_2/relu",
+            "port": "conv15_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 69,
+            "name": "conv15_2_mbox_loc_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv15_2_mbox_loc_flat",
+            "port": "conv15_2_mbox_loc_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 309,
+            "name": "conv10/dw",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv10/dw",
+            "port": "conv10/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 142,
+            "name": "conv17_2_mbox_conf",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv17_2_mbox_conf",
+            "port": "conv17_2_mbox_conf"
+        }
+    },
+    {
+        "IR": {
+            "id": 118,
+            "name": "conv13/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv13/relu",
+            "port": "conv13"
+        }
+    },
+    {
+        "IR": {
+            "id": 181,
+            "name": "conv3/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv3/dw/relu",
+            "port": "conv3/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 74,
+            "name": "conv13_mbox_priorbox",
+            "port": 2
+        },
+        "framework": {
+            "name": "conv13_mbox_priorbox",
+            "port": "conv13_mbox_priorbox"
+        }
+    },
+    {
+        "IR": {
+            "id": 35,
+            "name": "conv1/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv1/dw/relu",
+            "port": "conv1/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 222,
+            "name": "conv4/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv4/dw/relu",
+            "port": "conv4/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 266,
+            "name": "conv10/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv10/dw/relu",
+            "port": "conv10/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 250,
+            "name": "conv14_1",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv14_1",
+            "port": "conv14_1"
+        }
+    },
+    {
+        "IR": {
+            "id": 251,
+            "name": "conv13/dw/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv13/dw/relu",
+            "port": "conv13/dw"
+        }
+    },
+    {
+        "IR": {
+            "id": 152,
+            "name": "conv0",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv0",
+            "port": "conv0"
+        }
+    },
+    {
+        "IR": {
+            "id": 133,
+            "name": "conv15_2",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv15_2",
+            "port": "conv15_2"
+        }
+    },
+    {
+        "IR": {
+            "id": 200,
+            "name": "conv15_2_mbox_priorbox",
+            "port": 2
+        },
+        "framework": {
+            "name": "conv15_2_mbox_priorbox",
+            "port": "conv15_2_mbox_priorbox"
+        }
+    },
+    {
+        "IR": {
+            "id": 106,
+            "name": "conv13_mbox_conf_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv13_mbox_conf_flat",
+            "port": "conv13_mbox_conf_flat"
+        }
+    },
+    {
+        "IR": {
+            "id": 270,
+            "name": "conv5/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv5/relu",
+            "port": "conv5"
+        }
+    },
+    {
+        "IR": {
+            "id": 204,
+            "name": "mbox_conf",
+            "port": 6
+        },
+        "framework": {
+            "name": "mbox_conf",
+            "port": "mbox_conf"
+        }
+    },
+    {
+        "IR": {
+            "id": 87,
+            "name": "conv7",
+            "port": 3
+        },
+        "framework": {
+            "name": "conv7",
+            "port": "conv7"
+        }
+    },
+    {
+        "IR": {
+            "id": 201,
+            "name": "conv12/relu",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv12/relu",
+            "port": "conv12"
+        }
+    },
+    {
+        "IR": {
+            "id": 190,
+            "name": "conv17_2_mbox_conf_perm",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv17_2_mbox_conf_perm",
+            "port": "conv17_2_mbox_conf_perm"
+        }
+    },
+    {
+        "IR": {
+            "id": 279,
+            "name": "conv11_mbox_loc_flat",
+            "port": 1
+        },
+        "framework": {
+            "name": "conv11_mbox_loc_flat",
+            "port": "conv11_mbox_loc_flat"
+        }
+    }
+]
