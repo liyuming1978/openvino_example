@@ -1,0 +1,1272 @@
+<?xml version="1.0" ?>
+<net batch="1" name="model" version="2">
+	<layers>
+		<layer id="0" name="data" precision="FP32" type="Input">
+			<output>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="Mul_363/Fused_Mul_531/FusedScaleShift_698" precision="FP32" type="ScaleShift">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="0" size="12"/>
+				<biases offset="12" size="12"/>
+			</blobs>
+		</layer>
+		<layer id="2" name="conv1" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="3" kernel-y="3" output="32" pad-x="1" pad-y="1" stride="1,1,2,2" stride-x="2" stride-y="2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>224</dim>
+					<dim>224</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="24" size="3456"/>
+				<biases offset="3480" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="3" name="relu1" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="4" name="conv2_1/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="32" kernel-x="3" kernel-y="3" output="32" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3608" size="1152"/>
+				<biases offset="4760" size="128"/>
+			</blobs>
+		</layer>
+		<layer id="5" name="relu2_1/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="6" name="conv2_1/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="64" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="4888" size="8192"/>
+				<biases offset="13080" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="7" name="relu2_1/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="8" name="conv2_2/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="64" kernel-x="3" kernel-y="3" output="64" pad-x="1" pad-y="1" stride="1,1,2,2" stride-x="2" stride-y="2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>112</dim>
+					<dim>112</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="13336" size="2304"/>
+				<biases offset="15640" size="256"/>
+			</blobs>
+		</layer>
+		<layer id="9" name="relu2_2/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="10" name="conv2_2/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="128" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="15896" size="32768"/>
+				<biases offset="48664" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="11" name="relu2_2/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="12" name="conv3_1/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="128" kernel-x="3" kernel-y="3" output="128" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="49176" size="4608"/>
+				<biases offset="53784" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="13" name="relu3_1/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="14" name="conv3_1/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="128" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="54296" size="65536"/>
+				<biases offset="119832" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="15" name="relu3_1/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="16" name="conv3_2/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="128" kernel-x="3" kernel-y="3" output="128" pad-x="1" pad-y="1" stride="1,1,2,2" stride-x="2" stride-y="2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>56</dim>
+					<dim>56</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="120344" size="4608"/>
+				<biases offset="124952" size="512"/>
+			</blobs>
+		</layer>
+		<layer id="17" name="relu3_2/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="18" name="conv3_2/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="256" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="125464" size="131072"/>
+				<biases offset="256536" size="1024"/>
+			</blobs>
+		</layer>
+		<layer id="19" name="relu3_2/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="20" name="conv4_1/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="256" kernel-x="3" kernel-y="3" output="256" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="257560" size="9216"/>
+				<biases offset="266776" size="1024"/>
+			</blobs>
+		</layer>
+		<layer id="21" name="relu4_1/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="22" name="conv4_1/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="256" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="267800" size="262144"/>
+				<biases offset="529944" size="1024"/>
+			</blobs>
+		</layer>
+		<layer id="23" name="relu4_1/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="24" name="conv4_2/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="256" kernel-x="3" kernel-y="3" output="256" pad-x="1" pad-y="1" stride="1,1,2,2" stride-x="2" stride-y="2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>28</dim>
+					<dim>28</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="530968" size="9216"/>
+				<biases offset="540184" size="1024"/>
+			</blobs>
+		</layer>
+		<layer id="25" name="relu4_2/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="26" name="conv4_2/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="512" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="541208" size="524288"/>
+				<biases offset="1065496" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="27" name="relu4_2/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="28" name="conv5_1/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="512" kernel-x="3" kernel-y="3" output="512" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1067544" size="18432"/>
+				<biases offset="1085976" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="29" name="relu5_1/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="30" name="conv5_1/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="512" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="1088024" size="1048576"/>
+				<biases offset="2136600" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="31" name="relu5_1/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="32" name="conv5_2/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="512" kernel-x="3" kernel-y="3" output="512" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2138648" size="18432"/>
+				<biases offset="2157080" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="33" name="relu5_2/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="34" name="conv5_2/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="512" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2159128" size="1048576"/>
+				<biases offset="3207704" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="35" name="relu5_2/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="36" name="conv5_3/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="512" kernel-x="3" kernel-y="3" output="512" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3209752" size="18432"/>
+				<biases offset="3228184" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="37" name="relu5_3/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="38" name="conv5_3/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="512" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="3230232" size="1048576"/>
+				<biases offset="4278808" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="39" name="relu5_3/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="40" name="conv5_4/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="512" kernel-x="3" kernel-y="3" output="512" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="4280856" size="18432"/>
+				<biases offset="4299288" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="41" name="relu5_4/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="42" name="conv5_4/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="512" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="4301336" size="1048576"/>
+				<biases offset="5349912" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="43" name="relu5_4/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="44" name="conv5_5/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="512" kernel-x="3" kernel-y="3" output="512" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="5351960" size="18432"/>
+				<biases offset="5370392" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="45" name="relu5_5/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="46" name="conv5_5/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="512" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="5372440" size="1048576"/>
+				<biases offset="6421016" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="47" name="relu5_5/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="48" name="conv5_6/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="512" kernel-x="3" kernel-y="3" output="512" pad-x="1" pad-y="1" stride="1,1,2,2" stride-x="2" stride-y="2"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>14</dim>
+					<dim>14</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="6423064" size="18432"/>
+				<biases offset="6441496" size="2048"/>
+			</blobs>
+		</layer>
+		<layer id="49" name="relu5_6/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="50" name="conv5_6/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="1024" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="6443544" size="2097152"/>
+				<biases offset="8540696" size="4096"/>
+			</blobs>
+		</layer>
+		<layer id="51" name="relu5_6/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="52" name="conv6/dw" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1024" kernel-x="3" kernel-y="3" output="1024" pad-x="1" pad-y="1" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="8544792" size="36864"/>
+				<biases offset="8581656" size="4096"/>
+			</blobs>
+		</layer>
+		<layer id="53" name="relu6/dw" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="54" name="conv6/sep" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="1024" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="8585752" size="4194304"/>
+				<biases offset="12780056" size="4096"/>
+			</blobs>
+		</layer>
+		<layer id="55" name="relu6/sep" precision="FP32" type="ReLU">
+			<data engine="caffe.ReLUParameter.DEFAULT" negative_slope="0.0"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="56" name="pool6" precision="FP32" type="Pooling">
+			<data exclude-pad="false" kernel-x="7" kernel-y="7" pad-x="0" pad-y="0" pool-method="avg" rounding_type="ceil" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>7</dim>
+					<dim>7</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="57" name="fc7" precision="FP32" type="Convolution">
+			<data dilation-x="1" dilation-y="1" group="1" kernel-x="1" kernel-y="1" output="1000" pad-x="0" pad-y="0" stride="1,1,1,1" stride-x="1" stride-y="1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>1</dim>
+					<dim>1000</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="12784152" size="4096000"/>
+				<biases offset="16880152" size="4000"/>
+			</blobs>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="1" to-port="0"/>
+		<edge from-layer="1" from-port="3" to-layer="2" to-port="0"/>
+		<edge from-layer="2" from-port="3" to-layer="3" to-port="0"/>
+		<edge from-layer="3" from-port="1" to-layer="4" to-port="0"/>
+		<edge from-layer="4" from-port="3" to-layer="5" to-port="0"/>
+		<edge from-layer="5" from-port="1" to-layer="6" to-port="0"/>
+		<edge from-layer="6" from-port="3" to-layer="7" to-port="0"/>
+		<edge from-layer="7" from-port="1" to-layer="8" to-port="0"/>
+		<edge from-layer="8" from-port="3" to-layer="9" to-port="0"/>
+		<edge from-layer="9" from-port="1" to-layer="10" to-port="0"/>
+		<edge from-layer="10" from-port="3" to-layer="11" to-port="0"/>
+		<edge from-layer="11" from-port="1" to-layer="12" to-port="0"/>
+		<edge from-layer="12" from-port="3" to-layer="13" to-port="0"/>
+		<edge from-layer="13" from-port="1" to-layer="14" to-port="0"/>
+		<edge from-layer="14" from-port="3" to-layer="15" to-port="0"/>
+		<edge from-layer="15" from-port="1" to-layer="16" to-port="0"/>
+		<edge from-layer="16" from-port="3" to-layer="17" to-port="0"/>
+		<edge from-layer="17" from-port="1" to-layer="18" to-port="0"/>
+		<edge from-layer="18" from-port="3" to-layer="19" to-port="0"/>
+		<edge from-layer="19" from-port="1" to-layer="20" to-port="0"/>
+		<edge from-layer="20" from-port="3" to-layer="21" to-port="0"/>
+		<edge from-layer="21" from-port="1" to-layer="22" to-port="0"/>
+		<edge from-layer="22" from-port="3" to-layer="23" to-port="0"/>
+		<edge from-layer="23" from-port="1" to-layer="24" to-port="0"/>
+		<edge from-layer="24" from-port="3" to-layer="25" to-port="0"/>
+		<edge from-layer="25" from-port="1" to-layer="26" to-port="0"/>
+		<edge from-layer="26" from-port="3" to-layer="27" to-port="0"/>
+		<edge from-layer="27" from-port="1" to-layer="28" to-port="0"/>
+		<edge from-layer="28" from-port="3" to-layer="29" to-port="0"/>
+		<edge from-layer="29" from-port="1" to-layer="30" to-port="0"/>
+		<edge from-layer="30" from-port="3" to-layer="31" to-port="0"/>
+		<edge from-layer="31" from-port="1" to-layer="32" to-port="0"/>
+		<edge from-layer="32" from-port="3" to-layer="33" to-port="0"/>
+		<edge from-layer="33" from-port="1" to-layer="34" to-port="0"/>
+		<edge from-layer="34" from-port="3" to-layer="35" to-port="0"/>
+		<edge from-layer="35" from-port="1" to-layer="36" to-port="0"/>
+		<edge from-layer="36" from-port="3" to-layer="37" to-port="0"/>
+		<edge from-layer="37" from-port="1" to-layer="38" to-port="0"/>
+		<edge from-layer="38" from-port="3" to-layer="39" to-port="0"/>
+		<edge from-layer="39" from-port="1" to-layer="40" to-port="0"/>
+		<edge from-layer="40" from-port="3" to-layer="41" to-port="0"/>
+		<edge from-layer="41" from-port="1" to-layer="42" to-port="0"/>
+		<edge from-layer="42" from-port="3" to-layer="43" to-port="0"/>
+		<edge from-layer="43" from-port="1" to-layer="44" to-port="0"/>
+		<edge from-layer="44" from-port="3" to-layer="45" to-port="0"/>
+		<edge from-layer="45" from-port="1" to-layer="46" to-port="0"/>
+		<edge from-layer="46" from-port="3" to-layer="47" to-port="0"/>
+		<edge from-layer="47" from-port="1" to-layer="48" to-port="0"/>
+		<edge from-layer="48" from-port="3" to-layer="49" to-port="0"/>
+		<edge from-layer="49" from-port="1" to-layer="50" to-port="0"/>
+		<edge from-layer="50" from-port="3" to-layer="51" to-port="0"/>
+		<edge from-layer="51" from-port="1" to-layer="52" to-port="0"/>
+		<edge from-layer="52" from-port="3" to-layer="53" to-port="0"/>
+		<edge from-layer="53" from-port="1" to-layer="54" to-port="0"/>
+		<edge from-layer="54" from-port="3" to-layer="55" to-port="0"/>
+		<edge from-layer="55" from-port="1" to-layer="56" to-port="0"/>
+		<edge from-layer="56" from-port="1" to-layer="57" to-port="0"/>
+	</edges>
+</net>

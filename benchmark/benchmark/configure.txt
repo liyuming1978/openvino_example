@@ -1,7 +1,13 @@
 ﻿#Bechmark configurations.
+#INFERDEVICE=GPU CPU
+#MODELPRECISION=FP32 FP16 
+#MODELNAME=mobilenet googlenet
+#BATCHRANGE=1 2 4 8
+#EXTRAWORK=c:/ffmpeg 2 4 6
+#EXTRAWORKINFO=推理的同时进行解码,解码帧率25fps,缩放640*480
+
 INFERDEVICE=GPU CPU
 MODELPRECISION=FP32 FP16 
-MODELNAME=mobilenet
-BATCHRANGE=1 2 4 8
-EXTRAWORK=c:/ffmpeg 2 4 6
-EXTRAWORKINFO=推理的同时进行解码,解码帧率25fps,缩放640*480
+MODELNAME=AlexNet GoogleNet mobilenet_v1 ResNet-50 ResNet-101 VGG16 yolo mobilenet_v2 MobileNetSSD squeezenet squeezenet_ssd
+BATCHRANGE=1 2 4 8 16 32 64
+
