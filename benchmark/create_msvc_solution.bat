@@ -19,7 +19,9 @@
 set "ROOT_DIR=%~dp0"
 
 set "SOLUTION_DIR64=%ROOT_DIR%\build"
-set "InferenceEngine_DIR=C:\Intel\computer_vision_sdk_2018.1.265\deployment_tools\inference_engine\share"
+set "InferenceEngine_DIR=C:\Intel\computer_vision_sdk_2018.2.298\deployment_tools\inference_engine\share"
+set "OpenCV_DIR=C:\Intel\computer_vision_sdk_2018.2.298\opencv"
+
 
 echo Creating Visual Studio 2015 (x64) files in %SOLUTION_DIR64%... && ^
 cd "%ROOT_DIR%" && cmake -E make_directory "%SOLUTION_DIR64%" && cd "%SOLUTION_DIR64%" && cmake -G "Visual Studio 14 2015 Win64" "%ROOT_DIR%"

@@ -163,7 +163,15 @@ int main()
 			STROUT (<< "Device:"<< device<<"  Precision:" << precision << std::endl);
 			STROUT (<< "ModelName        ");  //all 8 spaces
 			for (int batch : Configure::getInstance().batchs) {
-				STROUT (<< batch << "        ");
+				if (batch < 10) {
+					STROUT(<< batch << "        ");
+				}
+				else if (batch < 100) {
+					STROUT(<< batch << "       ");
+				}
+				else {
+					STROUT(<< batch << "      ");
+				}
 			}
 			STROUT (<< std::endl);
 
@@ -182,15 +190,7 @@ int main()
 							break;
 						}
 						string retperf = perf.Perf();
-						if (batch < 10) {
-							STROUT(<< retperf << spacestring.substr(0, 9 - retperf.length()));
-						}
-						else if (batch < 100) {
-							STROUT(<< retperf << spacestring.substr(0, 10 - retperf.length()));
-						}
-						else {
-							STROUT(<< retperf << spacestring.substr(0, 11 - retperf.length()));
-						}
+						STROUT(<< retperf << spacestring.substr(0, 9 - retperf.length()));
 					}
 				}
 				STROUT (<< std::endl);
