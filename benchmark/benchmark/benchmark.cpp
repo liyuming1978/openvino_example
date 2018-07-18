@@ -10,7 +10,11 @@
 #include <sstream>
 #include <stdexcept>
 #include <ctime>
+#ifdef _WIN32
 #include <direct.h>
+#else
+#include <sys/stat.h>
+#endif
 
 #include "Configure.h"
 #include "InferPerf.h"
@@ -24,25 +28,27 @@ vector<string> split(string strtem, char a)
 	vector<string> strvec;
 
 	string::size_type pos1, pos2;
+	strtem = strtem + a;
 	pos2 = strtem.find(a);
 	pos1 = 0;
 	while (string::npos != pos2)
 	{
-		strvec.push_back(strtem.substr(pos1, pos2 - pos1));
-
+		if(pos2>pos1){
+			string tmp = strtem.substr(pos1, pos2 - pos1);
+			string tmp2="";
+			for(auto c:tmp){
+				if (c!=a && c!='\r' && c!='\n')
+					tmp2+=c;
+			}
+			strvec.push_back(tmp2);
+		}
 		pos1 = pos2 + 1;
+		while(strtem[pos1]==a||strtem[pos1]=='\r'||strtem[pos1]=='\n'){
+			pos1++;
+		}
 		pos2 = strtem.find(a, pos1);
 	}
-	string splitstr = strtem.substr(pos1);
-	bool bfindsome = false;
-	for (auto c : splitstr) {
-		if (c != a) {
-			bfindsome = true;
-			break;
-		}
-	}
-	if(bfindsome)
-		strvec.push_back(splitstr);
+
 	return strvec;
 }
 
@@ -85,7 +91,7 @@ string GenerateWeights(const string& path, const string& xmlname)
 
 	xmlfile.open(path+ xmlname+".xml");
 	if (!xmlfile.is_open())
-		return "XMLNA:"+ path + xmlname;
+		return "XMLNA:"+ path + xmlname + ".xml";
 	while (!xmlfile.eof())
 	{
 		std::getline(xmlfile, sLine);
@@ -128,7 +134,11 @@ string GenerateWeights(const string& path, const string& xmlname)
 #define STROUT(a) resultfile a;std::cout a;
 int main()
 {
+#ifdef _WIN32
 	_mkdir("result");
+#else
+	mkdir("result", 0777);
+#endif
 	string spacestring = "                                                 ";
 	time_t t = time(0);
 	char ch[64];

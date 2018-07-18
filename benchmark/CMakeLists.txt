@@ -134,7 +134,7 @@ endif()
 if (WIN32)
 	file(GLOB dynamicfiles "${InferenceEngine_DIR}/../bin/intel64/${CMAKE_BUILD_TYPE}/*.dll")
 else()
-	file(GLOB dynamicfiles "${InferenceEngine_DIR}/../bin/intel64/${CMAKE_BUILD_TYPE}/*.so")
+	file(GLOB dynamicfiles "${InferenceEngine_LibDIR}/intel64/*.so")
 endif()
 file(COPY  ${dynamicfiles} DESTINATION  "${CMAKE_SOURCE_DIR}/bin/intel64/${CMAKE_BUILD_TYPE}/"  )
 
